@@ -1,0 +1,439 @@
+####SQL Script of tables
+
+create table course(
+ courseId varchar(5) PRIMARY KEY NOT NULL,
+courseName varchar  (30),
+courseMaterials varchar (50),
+ sessionNumber number (5),
+courseHours number (3)
+);
+insert into course 
+values(1,'web development','fundamentals_of_web_development',12,2);
+insert into course 
+values(2,'UI/UX','User Interface & User experiance',12,2);
+insert into course 
+values(3,'CyberSecurity','Effective Cybersecurity',12,2);
+insert into course 
+values(4,'Android','Android app development',12,2);
+insert into course 
+values(5,'Machine learning','Machine Learning for Beginners',12,2);
+CREATE TABLE TA
+(
+TA_ID number(13) primary key not null,
+First_Name varchar2(25) not null,
+Last_Name varchar2(25) not null,
+TA_Mail varchar2(100) not null,
+Work_Hours number(13) ,
+TA_Office_Hours number(13),
+courseId varchar(5),
+FOREIGN KEY(courseId) REFERENCES course(courseId)
+);
+insert into TA
+values(01,'Ahmed','Mohamed','ahmed_mohamed@cis.asu.edu.eg',6,4,1);
+insert into TA
+values(02,'Sara','Yasser','sara_yasser@cis.asu.edu.eg',8,6,2);
+insert into TA
+values(03,'Mohamed','Refat','mohamed_refat@cis.asu.edu.eg',3,2,3);
+insert into TA
+values(04,'Rahma','Ali','rahma_ali@cis.asu.edu.eg',6,4,4);
+insert into TA
+values(05,'Fatma','Mahmoud','fatma_mahmoud@cis.asu.edu.eg',10,5,5);
+insert into TA
+values(06,'farida','Moustafa','farida_moustafa@cis.asu.edu.eg',10,5,5);
+create table projects(
+project_id number(5) primary key,
+project_name Varchar2 (50),
+describtion varchar2(300) ,
+project_mark varchar2 (2),
+p_discuss_date date,
+maxnumber number (4),
+course_id varchar(5) references course (COURSEID),
+ ta_id number(13) references TA (TA_ID)
+);
+insert into Projects
+values(1,'music_app','play music and albume artist','B+','07-NOV-22',7,'2',1);
+insert into projects
+values(2,'Amazon','shopping online','A+','09-NOV-22',9,'1',2);
+insert into projects
+values(7,'Movie APP','Streaming service offers a wide variety of tv shows , movies and anime','A+','10-NOV-22',4,'4',3);
+insert into projects
+values(10,'tensorflow','create data flow graphs','B','12-NOV-22',6,'5',4);
+insert into projects
+values(5,'website scraper','carfully collects data from website','B-','11-NOV-22',8,'3',5);
+create table Team
+(
+Team_ID number(2) primary key not null,
+Team_Name varchar2(20),
+Team_Leader number(13) references trainees (trainee_id)
+);
+insert into Team
+values(1,'Team1',20191700008);
+insert into Team
+values(2,'Team2',2022170012);
+insert into Team
+values(3,'Team3',2021170598);
+insert into Team
+values(4,'Team4',2019170080);
+insert into Team
+values(5,'Team5',2020170470);
+create table trainees(
+trainee_id  number(13) primary key not null,
+first_name varchar2(25) not null,
+last_name varchar2(25) not null,
+trainee_mail varchar2(320) not null check(
+trainee_mail like '%@cis.asu.edu.eg' or
+trainee_mail like '%@gmail.com' or
+trainee_mail like '%@yahoo.com') ,
+trainee_level number(1) check(trainee_level>=1  and trainee_level<=4)
+);
+insert into trainees
+values(20191700008,'Ahmed','Osama','20191700008@cis.asu.edu.eg',3);
+insert into trainees
+values(2019170080,'Basma','Hossam','2019170080@cis.asu.edu.eg',4);
+insert into trainees
+values(2020170224,'Abdallah','Mahfouz','2020170224@cis.asu.edu.eg',3);
+insert into trainees
+values(2020170389,'Layla','Salem','2020170389@cis.asu.edu.eg',3);
+insert into trainees
+values(2020170470,'Marie','Fady','2020170470@cis.asu.edu.eg',3);
+insert into trainees
+values(2020170605,'Hesham','Hussien','2020170605@cis.asu.edu.eg',3);
+insert into trainees
+values(2020170650,'Walid','Mounir','2020170650@cis.asu.edu.eg',3);
+insert into trainees
+values(2021170001,'Aser','Mohamed','2021170001@cis.asu.edu.eg',2);
+insert into trainees
+values(2021170160,'Habiba','Essam','2021170160@cis.asu.edu.eg',2);
+insert into trainees
+values(2021170253,'Seif','Shreif','2021170253@cis.asu.edu.eg',2);
+insert into trainees
+values(2021170598,'Noureen','Ashraf','2021170598@cis.asu.edu.eg',2);
+insert into trainees
+values(2021170620,'Yassmen','Ashraf','2021170620@cis.asu.edu.eg',2);
+insert into trainees
+values(2021170623,'Yosra','Nabil','2021170623@cis.asu.edu.eg',2);
+insert into trainees
+values(2021170627,'Youssef','Ahmed','2021170627@cis.asu.edu.eg',2);
+insert into trainees
+values(2022170012,'Esraa','Abdelghany','2022170012@cis.asu.edu.eg',1);
+insert into trainees
+values(2022170030,'Andrew','Fahmy','2022170030@cis.asu.edu.eg',1);
+insert into trainees
+values(2022170119,'Jana','Mohamed','2022170119@cis.asu.edu.eg',1);
+insert into trainees
+values(2022170230,'Dina','Shady','2022170230@cis.asu.edu.eg',1);
+insert into trainees
+values(2022170264,'Ramy','Ali','2022170264@cis.asu.edu.eg',1);
+insert into trainees
+values(2022170317,'Zeyad','Lasheen','2022170317@cis.asu.edu.eg',1);
+insert into trainees
+values(2022170390,'Omar','Salah','2022170390@cis.asu.edu.eg',1);
+create table course_Location1(
+ courseId varchar(5) NOT NULL,
+ courseLocation varchar(30) NOT NULL,
+  Primary Key (courseLocation,courseId),
+ FOREIGN KEY (courseId) REFERENCES course(courseId)
+
+);
+insert into course_Location1 (courseId,courselocation)
+values(1,'Class 1');
+
+insert into course_Location1 (courseId,courselocation)
+values(1,'Class 2');
+
+insert into course_Location1 (courseId,courselocation) 
+values(2,'Class 2');
+
+insert into course_Location1 (courseId,courselocation)
+values(2,'Class 7');
+
+insert into course_Location1 (courseId,courselocation) 
+values(3,'CIS Lab 1');
+
+insert into course_Location1 (courseId,courselocation)
+values(3,'Software Engineering Lab 1');
+
+insert into course_Location1 (courseId,courselocation)
+values(4,'CIS Lab 1');
+
+insert into course_Location1 (courseId,courselocation)
+values(4,'CIS Lab 3');
+
+insert into course_Location1 (courseId,courselocation) 
+values(5,'Software Engineering Lab 1');
+
+insert into course_Location1 (courseId,courselocation)
+values(5,'CIS Lab 3');
+create table attend(
+ courseId varchar(5) NOT NULL,
+  trainee_id  number(13) not null,
+  Primary Key (courseId,trainee_id),
+ FOREIGN KEY (courseId) REFERENCES course(courseId),
+ FOREIGN KEY (trainee_id) REFERENCES trainees(trainee_id)
+);
+insert into attend
+values(1,20191700008);
+insert into attend
+values(1,2019170080);
+insert into attend
+values(1,2020170224);
+insert into attend
+values(1,2020170389);
+insert into attend
+values(1,2020170470);
+insert into attend
+values(1,2020170605);
+insert into attend
+values(1,2020170650);
+
+insert into attend
+values(2,2021170001);
+insert into attend
+values(2,2021170160);
+insert into attend
+values(2,2021170253);
+insert into attend
+values(2,2021170598);
+insert into attend
+values(2,2021170620);
+insert into attend
+values(2,2021170623);
+insert into attend
+values(2,2021170627);
+
+insert into attend
+values(3,2022170012);
+insert into attend
+values(3,2022170030);
+insert into attend
+values(3,2022170119);
+insert into attend
+values(3,2022170230);
+insert into attend
+values(3,2022170264);
+insert into attend
+values(3,2022170317);
+insert into attend
+values(3,2022170390);
+
+insert into attend
+values(4,2020170224);
+insert into attend
+values(4,2020170389);
+insert into attend
+values(4,2020170470);
+insert into attend
+values(4,2021170001);
+insert into attend
+values(4,2021170160);
+insert into attend
+values(4,2022170317);
+insert into attend
+values(4,2022170390);
+
+insert into attend
+values(5,20191700008);
+insert into attend
+values(5,2019170080);
+insert into attend
+values(5,2021170253);
+insert into attend
+values(5,2021170598);
+insert into attend
+values(5,2022170012);
+insert into attend
+values(5,2022170030);
+insert into attend
+values(5,2022170119);
+create table Work(Start_date DATE not null,
+                  Deadline DATE not null,
+                  TraineeID NUMBER(13),
+                  TeamID NUMBER(2),
+                  ProjectID NUMBER(2),
+Primary key (TraineeID,TeamID,ProjectID),
+constraint fk_traineeId foreign key (TraineeID) references trainees(trainee_id),
+constraint fk_team foreign key (TeamID) references Team(Team_ID),
+constraint fk_project foreign key (ProjectID) references Projects(project_id));
+                  
+                  
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('09-JUN-22','01-JUL-22',20191700008,1,1 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('10-JUN-22','02-JUL-22',2019170080,2,22 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('11-JUN-22','03-JUL-22',2020170224,3,7 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('12-JUN-22','04-JUL-22',2020170389,4,10 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('13-JUN-22','06-JUL-22',2020170470,4,5 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('14-JUN-22','07-JUL-22',2020170605,1,22 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('15-JUN-22','06-JUL-22',2020170650,1,5 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('16-JUN-22','07-JUL-22',2021170001,3,10 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('17-JUN-22','08-JUL-22',2021170160,5,7 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('17-JUN-22','08-JUL-22',2021170253,5,7 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('09-JUN-22','09-JUL-22',2021170598,2,5 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('18-JUN-22','10-JUL-22',2021170620,1,7 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('19-JUN-22','11-JUL-22',2021170623,4,22 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('20-JUN-22','18-JUL-22',2021170627,5,1 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('21-JUN-22','18-JUL-22',2022170012,1,10 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('22-JUN-22','10-JUL-22',2022170030,2,7 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('23-JUN-22','11-JUL-22',2022170119,2,1 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('23-JUN-22','13-JUL-22',2022170230,3,7 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('22-JUN-22','12-JUL-22',2022170264,4,22 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('24-JUN-22','20-JUL-22',2022170317,2,10 );
+
+INSERT INTO work(start_date, deadline, traineeid, teamid, projectid)
+VALUES ('25-JUN-22','25-JUL-22',2022170390,3,10 );
+
+####Insertation and ceration statments
+
+CREATE TABLE succeeded.
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+CREATE TABLE succeeded.
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+create table succeeded.
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+create table succeeded.
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+create table succeeded.
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+create table succeeded.
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+create table succeeded.
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+create table succeeded.
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
+1 rows inserted
